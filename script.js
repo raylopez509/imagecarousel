@@ -5,22 +5,45 @@ let index = 0;
 let pics = ['pic1.jpg','pic2.jpg','pic3.jpg']
 
 const changePrevPic = () => {
-  const picture = document.querySelector("img");
   index--;
   if(index == -1) {
     index = pics.length - 1;
   }
-  picture.src = pics[index];
+  changePic(index);
 }
 const changeNextPic = () => {
-  const picture = document.querySelector("img");
   index++;
   if(index == pics.length) {
     index = 0;
   }
-  picture.src = pics[index];
+  changePic(index);
 }
 
 
 triangleLeft.addEventListener("click", changePrevPic);
 triangleRight.addEventListener("click", changeNextPic);
+
+const changePic = (i) => {
+  const picture = document.querySelector('img');
+  picture.src = pics[i];
+  index = i;
+  setTimeout(() => {
+    index++;
+    if(index == pics.length) {
+      index = 0;
+    }
+    changePic(index)
+  },5000)
+}
+
+const dots = ['.img1','.img2','.img3'];
+for (i = 0; i < dots.length; i++) {
+  let dot = document.querySelector(dots[i]);
+  dot.dataset.pictureIndex = i;
+  dot.addEventListener("click", () => changePic(dot.dataset.pictureIndex));
+}
+
+// while()
+//   setTimeout(5000);
+//   index++;
+//   changePic(index);
