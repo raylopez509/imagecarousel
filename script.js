@@ -40,6 +40,8 @@ const changePic = (i) => {
   },5000);
 }
 
+changePic(index);
+
 const dots = ['.img1','.img2','.img3'];
 for (i = 0; i < dots.length; i++) {
   let dot = document.querySelector(dots[i]);
