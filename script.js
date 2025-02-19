@@ -19,21 +19,25 @@ const changeNextPic = () => {
   changePic(index);
 }
 
+let timeoutID = undefined;
 
 triangleLeft.addEventListener("click", changePrevPic);
 triangleRight.addEventListener("click", changeNextPic);
 
 const changePic = (i) => {
+  if(typeof timeoutID === "number") {
+    clearTimeout(timeoutID);
+  }
   const picture = document.querySelector('img');
   picture.src = pics[i];
   index = i;
-  setTimeout(() => {
+  timeoutID = setTimeout(() => {
     index++;
     if(index == pics.length) {
       index = 0;
     }
     changePic(index)
-  },5000)
+  },5000);
 }
 
 const dots = ['.img1','.img2','.img3'];
@@ -42,8 +46,3 @@ for (i = 0; i < dots.length; i++) {
   dot.dataset.pictureIndex = i;
   dot.addEventListener("click", () => changePic(dot.dataset.pictureIndex));
 }
-
-// while()
-//   setTimeout(5000);
-//   index++;
-//   changePic(index);
